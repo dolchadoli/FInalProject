@@ -31,4 +31,4 @@ API08	POST Verify Login without email parameter	Zuka
 API09	DELETE Verify Login (Method Not Allowed)	Zuka
 API10	POST Verify Login with invalid details	Luka
 
-run the project with mvn clean test
+run the project with mvn clean test.
