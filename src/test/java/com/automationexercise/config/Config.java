@@ -32,6 +32,6 @@ public class Config {
     }
 
     public static int timeoutSeconds() {
-        return Integer.parseInt(props.getProperty("timeout.seconds", "12").trim());
+        return Integer.parseInt(props.getProperty("timeout.seconds", "20").trim());
     }
 }

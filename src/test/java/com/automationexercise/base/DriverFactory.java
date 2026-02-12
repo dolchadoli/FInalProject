@@ -16,11 +16,12 @@ public class DriverFactory {
             options.addArguments("--headless=new");
         }
         options.addArguments("--start-maximized");
-        options.addArguments("--disable-gpu");
-        options.addArguments("--no-sandbox");
+       // options.addArguments("--disable-gpu");
+      //  options.addArguments("--no-sandbox");
+        options.addArguments("--disable-blink-features=AutomationControlled");
         options.addArguments("--disable-notifications");
         options.addArguments("--disable-popup-blocking");
-        options.addArguments("--disable-extensions");
+      //  options.addArguments("--disable-extensions");
         options.addArguments("--incognito");
 
 

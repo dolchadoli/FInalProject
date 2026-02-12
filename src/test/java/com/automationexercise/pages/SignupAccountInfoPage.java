@@ -25,7 +25,7 @@ public class SignupAccountInfoPage extends BasePage {
 
     private final By createAccountBtn = By.cssSelector("button[data-qa='create-account']");
 
-    private final By accountCreated = By.xpath("//*[contains(text(),'ACCOUNT CREATED!')]");
+    private final By accountCreated = By.xpath("//*[@id=\"form\"]/div/div/div/h2/b");
     private final By continueBtn = By.cssSelector("a[data-qa='continue-button']");
 
     public SignupAccountInfoPage(WebDriver driver) {

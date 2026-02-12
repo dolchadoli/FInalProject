@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class BasePage {
+
     protected final WebDriver driver;
     protected final WebDriverWait wait;
 
@@ -26,29 +27,28 @@ public class BasePage {
 
     protected void click(By locator) {
         try {
-            clickable(locator).click();
+            WebElement element = clickable(locator);
+
+            ((JavascriptExecutor) driver)
+                    .executeScript("arguments[0].scrollIntoView(true);", element);
+
+            element.click();
+
         } catch (StaleElementReferenceException e) {
             clickable(locator).click();
+
         } catch (ElementClickInterceptedException e) {
-            JavascriptExecutor js = (JavascriptExecutor) driver;
-            js.executeScript("arguments[0].click();", visible(locator));
+            WebElement element = visible(locator);
+            ((JavascriptExecutor) driver)
+                    .executeScript("arguments[0].click();", element);
         }
     }
-
 
     protected void type(By locator, String text) {
         WebElement el = visible(locator);
         el.clear();
         el.sendKeys(text);
     }
-
-    protected void closeAdsIfPresent() {
-        try {
-            By adClose = By.xpath("//div[@id='dismiss-button' or contains(@class,'close')]");
-            driver.findElement(adClose).click();
-        } catch (Exception ignored) {}
-    }
-
 
     protected boolean isDisplayed(By locator) {
         try {
