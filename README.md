@@ -24,7 +24,7 @@ API01	Get All Products List	Nika
 API02	POST To Products List (Method Not Allowed)	Nika
 API03	Get All Brands List	Luka
 API04	PUT To Brands List (Method Not Allowed)	Luka
-API05	POST Search Product	Khatia
+API05	POST Search Product	Khatia.
 API06	POST Search Product without search_product parameter	Khatia
 API07	POST Verify Login with valid details	Nika
 API08	POST Verify Login without email parameter	Zuka
