@@ -2,13 +2,14 @@ package com.automationexercise.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
 public class SignupAccountInfoPage extends BasePage {
 
     // Minimal fields to complete registration
     private final By titleMr = By.id("id_gender1");
-    private final By password = By.id("password");
+    private final By passwordInput = By.id("password");
 
     private final By days = By.id("days");
     private final By months = By.id("months");
@@ -25,7 +26,8 @@ public class SignupAccountInfoPage extends BasePage {
 
     private final By createAccountBtn = By.cssSelector("button[data-qa='create-account']");
 
-    private final By accountCreated = By.xpath("//*[@id=\"form\"]/div/div/div/h2/b");
+    // "ACCOUNT CREATED!" banner
+    private final By accountCreated = By.cssSelector("h2[data-qa='account-created'] b, #form h2 b");
     private final By continueBtn = By.cssSelector("a[data-qa='continue-button']");
 
     public SignupAccountInfoPage(WebDriver driver) {
@@ -34,16 +36,11 @@ public class SignupAccountInfoPage extends BasePage {
 
     public void fillAccountInfoAndCreate(String pass) {
         click(titleMr);
-        type(password, pass);
-
-
+        type(passwordInput, pass);
 
         new Select(visible(days)).selectByVisibleText("10");
         new Select(visible(months)).selectByVisibleText("May");
         new Select(visible(years)).selectByValue("1999");
-
-
-
 
         type(firstName, "Test");
         type(lastName, "User");
@@ -55,16 +52,21 @@ public class SignupAccountInfoPage extends BasePage {
         type(zipcode, "0101");
         type(mobile, "555123123");
 
-
         click(createAccountBtn);
+
+        // Wait until the success banner appears
+        wait.until(ExpectedConditions.visibilityOfElementLocated(accountCreated));
     }
 
     public boolean isAccountCreatedVisible() {
-        return visible(accountCreated).isDisplayed();
+        // safe boolean check (no thrown timeout)
+        return isDisplayed(accountCreated);
     }
-
 
     public void clickContinue() {
         click(continueBtn);
+
+        // after Continue, site usually navigates back to home
+        wait.until(ExpectedConditions.urlContains("/"));
     }
 }
