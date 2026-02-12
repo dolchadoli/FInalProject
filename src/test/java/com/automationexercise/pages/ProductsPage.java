@@ -5,7 +5,8 @@ import org.openqa.selenium.WebDriver;
 
 public class ProductsPage extends BasePage {
 
-    private final By allProductsHeader = By.xpath("//*[contains(text(),'All Products')]");
+    private final By allProductsHeader = By.xpath("//h2[text()='All Products']");
+
     private final By firstProductView = By.cssSelector("a[href^='/product_details/']");
 
     private final By searchInput = By.id("search_product");
@@ -21,7 +22,7 @@ public class ProductsPage extends BasePage {
     }
 
     public boolean isAllProductsVisible() {
-        return isDisplayed(allProductsHeader);
+        return visible(allProductsHeader).isDisplayed();
     }
 
     public void openFirstProductDetails() {

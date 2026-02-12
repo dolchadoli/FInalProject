@@ -25,14 +25,30 @@ public class BasePage {
     }
 
     protected void click(By locator) {
-        clickable(locator).click();
+        try {
+            clickable(locator).click();
+        } catch (StaleElementReferenceException e) {
+            clickable(locator).click();
+        } catch (ElementClickInterceptedException e) {
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("arguments[0].click();", visible(locator));
+        }
     }
+
 
     protected void type(By locator, String text) {
         WebElement el = visible(locator);
         el.clear();
         el.sendKeys(text);
     }
+
+    protected void closeAdsIfPresent() {
+        try {
+            By adClose = By.xpath("//div[@id='dismiss-button' or contains(@class,'close')]");
+            driver.findElement(adClose).click();
+        } catch (Exception ignored) {}
+    }
+
 
     protected boolean isDisplayed(By locator) {
         try {

@@ -2,6 +2,7 @@ package com.automationexercise.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.Select;
 
 public class SignupAccountInfoPage extends BasePage {
 
@@ -16,6 +17,7 @@ public class SignupAccountInfoPage extends BasePage {
     private final By firstName = By.id("first_name");
     private final By lastName = By.id("last_name");
     private final By address = By.id("address1");
+    private final By country = By.id("country");
     private final By state = By.id("state");
     private final By city = By.id("city");
     private final By zipcode = By.id("zipcode");
@@ -34,25 +36,33 @@ public class SignupAccountInfoPage extends BasePage {
         click(titleMr);
         type(password, pass);
 
-        // These dropdowns accept sendKeys as quick selection
-        type(days, "10");
-        type(months, "May");
-        type(years, "1999");
+
+
+        new Select(visible(days)).selectByVisibleText("10");
+        new Select(visible(months)).selectByVisibleText("May");
+        new Select(visible(years)).selectByValue("1999");
+
+
+
 
         type(firstName, "Test");
         type(lastName, "User");
         type(address, "Tbilisi Address 1");
+        new Select(visible(country)).selectByVisibleText("India");
+
         type(state, "Tbilisi");
         type(city, "Tbilisi");
         type(zipcode, "0101");
         type(mobile, "555123123");
 
+
         click(createAccountBtn);
     }
 
     public boolean isAccountCreatedVisible() {
-        return isDisplayed(accountCreated);
+        return visible(accountCreated).isDisplayed();
     }
+
 
     public void clickContinue() {
         click(continueBtn);

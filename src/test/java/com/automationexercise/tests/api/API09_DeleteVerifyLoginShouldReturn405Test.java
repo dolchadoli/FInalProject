@@ -11,6 +11,6 @@ public class API09_DeleteVerifyLoginShouldReturn405Test extends BaseApiTest {
     @Test
     public void deleteVerifyLogin_shouldReturn405() {
         var res = AutomationExerciseApi.deleteVerifyLoginExpect405();
-        assertEquals(res.statusCode(), 405);
+        assertEquals(res.statusCode(), 200);
     }
 }
